@@ -16,15 +16,6 @@
 - **ML**: scikit-learn, Prophet, TensorFlow/Keras
 - **Dashboard**: Streamlit
 
-
-
-## 🚀 Quick Start
-```bash
-git clone https://github.com/shayan-ing/Air-Quality-Analytics-and-Pollution-Forecasting
-cd air-quality-analytics
-pip install -r requirements.txt
-streamlit run dashboard/app.py
-
 📊 Results
 
 Best Model: Random Forest / LSTM (R² > 0.80 | MAPE < 20%)
@@ -41,3 +32,7 @@ Aryan Singh
 Shayan Akhtar Abedeen
 
 Made with ❤️ for Smart Cities & SDG 3, 11, 13
+
+
+
+
