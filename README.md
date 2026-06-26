@@ -11,7 +11,7 @@
 
 <br>
 
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![Scikit Learn](https://img.shields.io/badge/ScikitLearn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![XGBoost](https://img.shields.io/badge/XGBoost-ML-00A86B?style=for-the-badge)
@@ -19,12 +19,6 @@
 ![MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 <br>
-
-![Stars](https://img.shields.io/github/stars/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
-
-![Forks](https://img.shields.io/github/forks/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
-
-![Issues](https://img.shields.io/github/issues/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
 
 ![Visitors](https://komarev.com/ghpvc/?username=shayan-ing&style=for-the-badge&color=blue)
 
