@@ -1,0 +1,2 @@
+# Air-Quality-Analytics-and-Pollution-Forecasting
+🌬️ Air Quality Analytics &amp; AQI Forecasting Platform  India-focused end-to-end minor project for real-time AQI monitoring and 7-day pollution forecasting. Features: • Data from CPCB, OpenAQ &amp; Kaggle India AQI dataset • Models: ARIMA, Prophet, Random Forest, LSTM (R² > 0.80) • Interactive Streamlit dashboard with AQI gauge, forecasts &amp; health alerts
