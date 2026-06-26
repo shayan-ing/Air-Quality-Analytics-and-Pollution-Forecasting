@@ -99,7 +99,7 @@ This project presents an **AI-powered Air Quality Analytics Platform** designed 
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=python,jupyter,git,github,vscode"/>
+<img src="https://skillicons.dev/icons?i=python,html,sklearn,js,git,github,vscode"/>
 
 </div>
 
