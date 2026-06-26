@@ -27,9 +27,9 @@ Architecture
 
 👥 Contributors
 
-Aman Singh
-Aryan Singh
-Shayan Akhtar Abedeen
+- Aman Singh
+- Aryan Singh
+- Shayan Akhtar Abedeen
 
 Made with ❤️ for Smart Cities & SDG 3, 11, 13
 
