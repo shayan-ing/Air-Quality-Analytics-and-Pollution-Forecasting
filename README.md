@@ -8,24 +8,65 @@
 </div>
 
 ---
+<!-- Animated Header -->
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)
-
-![XGBoost](https://img.shields.io/badge/XGBoost-ML-green)
-
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
-![Stars](https://img.shields.io/github/stars/username/AirQualityProject)
-
-![Forks](https://img.shields.io/github/forks/username/AirQualityProject)
-
-![Visitors](https://komarev.com/ghpvc/?username=username\&label=Visitors\&color=blue)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=250&section=header&text=Air%20Quality%20Analytics&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=40"/>
 
 </div>
+
+
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&size=28&duration=3000&pause=1000&color=00C9FF&center=true&vCenter=true&width=900&lines=🌍+Air+Quality+Analytics+%26+AQI+Forecasting;📈+Machine+Learning+Powered+Predictions;⚡+Interactive+Streamlit+Dashboard;🛰️+Turning+Pollution+Data+Into+Insights" />
+
+</div>
+
+
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+
+![XGBoost](https://img.shields.io/badge/XGBoost-Model-00A86B?style=for-the-badge)
+
+![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas)
+
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+
+</div>
+
+
+
+<div align="center">
+
+![Stars](https://img.shields.io/github/stars/username/AirQualityProject?style=for-the-badge)
+
+![Forks](https://img.shields.io/github/forks/username/AirQualityProject?style=for-the-badge)
+
+![Issues](https://img.shields.io/github/issues/username/AirQualityProject?style=for-the-badge)
+
+![Visitors](https://komarev.com/ghpvc/?username=username&style=for-the-badge&color=blue)
+
+</div>
+
+
+---
+
+<div align="center">
+
+### 🌫️ Pollution Never Sleeps. Neither Does Data.
+
+<img width="700" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnN5c2c4dXhwbm1zN2JjOWF3eDFnM3ZibTJ2aGR6MzN5Nm5vYjB1ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0HlBO7eyXzSZkJri/giphy.gif">
+
+</div>
+
+---
 
 ---
 
