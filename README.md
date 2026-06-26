@@ -1,236 +1,243 @@
+
+# <div align="center">
+
 # 🌍 Air Quality Analytics & AQI Forecasting Platform
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&size=30&duration=3000&pause=1000&color=00BFFF&center=true&vCenter=true&width=900&lines=Air+Quality+Analytics+Platform;Machine+Learning+Powered+AQI+Forecasting;Random+Forest+%7C+XGBoost+%7C+Prophet;Smart+Cities+Mission+%7C+SDG+3+11+13"/>
+
+</div>
+
+---
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)
+
+![XGBoost](https://img.shields.io/badge/XGBoost-ML-green)
+
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+![Stars](https://img.shields.io/github/stars/username/AirQualityProject)
+
+![Forks](https://img.shields.io/github/forks/username/AirQualityProject)
+
+![Visitors](https://komarev.com/ghpvc/?username=username\&label=Visitors\&color=blue)
+
+</div>
+
+---
+
+# 📌 Overview
+
+> Predicting tomorrow's air before tomorrow arrives.
+
+Air pollution threatens millions of lives every year.
+
+This project provides an **AI-powered Air Quality Analytics Platform** capable of
+
+✅ Historical Analysis
+
+✅ AQI Forecasting
+
+✅ Pollution Pattern Detection
+
+✅ Health Advisory Generation
+
+✅ Interactive Dashboard Visualization
+
+---
+
+# 🖼 Demo Preview
 
 <p align="center">
 
-![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikitlearn)
-![XGBoost](https://img.shields.io/badge/XGBoost-Ensemble-green)
-![Prophet](https://img.shields.io/badge/Prophet-TimeSeries-purple)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+<img width="900" src="assets/dashboard_preview.gif">
 
 </p>
 
 ---
 
-# 📌 Project Overview
+# 🧠 Machine Learning Models
 
-Air pollution has become one of the most pressing environmental challenges affecting public health and urban sustainability. This project presents an end-to-end **Air Quality Analytics & AQI Forecasting Platform** capable of analyzing historical air pollution trends and forecasting future Air Quality Index (AQI) values using Machine Learning and Time Series models.
-
-The platform leverages pollutant concentrations and meteorological parameters to predict AQI and provides interactive visualizations through a Streamlit dashboard.
-
-### Objectives
-
-* Analyze historical air quality trends
-* Detect seasonal pollution patterns
-* Forecast AQI using ML and Time-Series models
-* Compare model performance
-* Provide health advisories based on AQI levels
-* Support Smart Cities Mission and SDG Goals (3, 11, 13)
+| Model            | R² Score | MAE     | RMSE    |
+| ---------------- | -------- | ------- | ------- |
+| 🌲 Random Forest | 0.999999 | 0.0503  | 0.1656  |
+| 🚀 XGBoost       | 0.999983 | 0.4436  | 0.7344  |
+| 🔮 Prophet       | 0.926510 | 36.9273 | 48.4374 |
 
 ---
 
-# 🛠 Tech Stack
+# ⚙ Tech Stack
 
-### Programming Language
+<div align="center">
 
-* Python 3.11
+<img src="https://skillicons.dev/icons?i=python,sklearn,tensorflow,git,github,vscode"/>
 
-### Libraries
-
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* Plotly
-* Scikit-Learn
-* XGBoost
-* Prophet
-* Joblib
-* Streamlit
-
-### Models Used
-
-✅ Random Forest Regressor
-
-✅ XGBoost Regressor
-
-✅ Prophet Forecasting Model
+</div>
 
 ---
 
-# 📊 Dataset
+# 🔄 Workflow
 
-Source:
+```mermaid
+flowchart LR
 
-* OpenAQ API
-* CPCB Historical AQI Data
-* Kaggle India AQI Dataset
 
-Dataset Size
+A[Raw AQI Dataset]
 
-* **201,664 rows**
-* **25 features**
+-->
 
-Selected City
+B[EDA]
 
-* **Delhi, India**
 
-Features include:
+-->
 
-```text
-PM2.5
-PM10
-NO₂
-SO₂
-CO
-O₃
-Temperature
-Humidity
-Wind Speed
-Visibility
-AQI
-AQI Category
+C[Feature Engineering]
+
+
+-->
+
+D[Random Forest]
+
+
+-->
+
+E[XGBoost]
+
+
+-->
+
+F[Prophet]
+
+
+-->
+
+G[Model Comparison]
+
+
+-->
+
+H[Streamlit Dashboard]
 ```
 
 ---
 
-# 🧠 Machine Learning Pipeline
-
-```text
-Raw Dataset
-        │
-        ▼
-EDA & Cleaning
-        │
-        ▼
-Feature Engineering
-        │
-        ▼
-Random Forest
-        │
-        ▼
-XGBoost
-        │
-        ▼
-Prophet
-        │
-        ▼
-Model Comparison
-        │
-        ▼
-Streamlit Dashboard
-```
-
----
-
-# 📈 Model Performance
-
-| Model         | R² Score | MAE     | RMSE    |
-| ------------- | -------- | ------- | ------- |
-| Random Forest | 0.999999 | 0.0503  | 0.1656  |
-| XGBoost       | 0.999983 | 0.4436  | 0.7344  |
-| Prophet       | 0.926510 | 36.9273 | 48.4374 |
-
----
-
-# 📂 Project Structure
+# 📂 Repository Structure
 
 ```text
 AirQualityProject/
 
-│
 
 ├── data/
 
-│   ├── raw/
-
-│   └── processed/
-
-│
-
-├── models/
-
-│   ├── random_forest.pkl
-
-│   ├── xgboost.pkl
-
-│   └── prophet_model.json
-
-│
 
 ├── notebooks/
 
-│   ├── 01_data_loading.ipynb
-
-│   ├── 02_eda_preprocessing.ipynb
-
-│   ├── 03_feature_engineering.ipynb
-
-│   ├── 04_random_forest.ipynb
-
-│   ├── 05_xgboost.ipynb
-
-│   ├── 06_prophet.ipynb
-
-│   └── 08_model_comparison.ipynb
-
-│
 
 ├── dashboard/
 
-│   └── app.py
 
-│
+├── models/
+
 
 ├── reports/
 
-│
 
 ├── presentation/
 
-│
+
+├── assets/
+
 
 ├── requirements.txt
 
-│
 
 └── README.md
 ```
 
 ---
 
-# ⚙ Installation
+# 📊 Dashboard Features
 
-Clone the repository
+<details>
+
+<summary>🌍 AQI Gauge Meter</summary>
+
+Displays current AQI with dynamic color zones.
+
+</details>
+
+<details>
+
+<summary>📈 Historical Trends</summary>
+
+Interactive Plotly charts.
+
+</details>
+
+<details>
+
+<summary>🚨 Health Advisory</summary>
+
+Personalized health recommendations.
+
+</details>
+
+<details>
+
+<summary>🔮 AQI Prediction</summary>
+
+Compare RF, XGBoost and Prophet outputs.
+
+</details>
+
+---
+
+# 🖼 Screenshots
+
+### Dashboard
+
+<p align="center">
+
+<img src="screenshots/dashboard.png" width="900">
+
+</p>
+
+### Forecast
+
+<p align="center">
+
+<img src="screenshots/forecast.png" width="900">
+
+</p>
+
+### Feature Importance
+
+<p align="center">
+
+<img src="screenshots/importance.png" width="900">
+
+</p>
+
+---
+
+# 🚀 Installation
 
 ```bash
-git clone https://github.com/yourusername/AirQualityAnalytics&PollutionForecasting.git
-```
+git clone https://github.com/yourusername/AirQualityProject.git
 
-Move inside project directory
 
-```bash
 cd AirQualityProject
-```
 
-Install dependencies
 
-```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# 🚀 Usage
-
-Run Jupyter notebooks
-
-```bash
-jupyter notebook
-```
-
-Run Streamlit dashboard
+# ▶ Run Dashboard
 
 ```bash
 streamlit run dashboard/app.py
@@ -238,69 +245,66 @@ streamlit run dashboard/app.py
 
 ---
 
-# 📷 Screenshots
-
-### Dashboard Overview
-
-```text
-(Add Screenshot Here)
-```
-
----
-
-### AQI Forecast
-
-```text
-(Add Screenshot Here)
-```
-
----
-
-### Feature Importance
-
-```text
-(Add Screenshot Here)
-```
-
----
-
 # 🌱 Sustainable Development Goals
 
-This project contributes towards:
-
-* SDG 3 → Good Health and Well-being
-* SDG 11 → Sustainable Cities and Communities
-* SDG 13 → Climate Action
-
----
-
-# 👥 Contributors
-
-| Name                  |
-| --------------------- |
-| Shayan Akhtar Abedeen |
-| Aman Singh            |
-| Aryan Singh           |
+| Goal   | Description                        |
+| ------ | ---------------------------------- |
+| SDG 3  | Good Health and Well-being         |
+| SDG 11 | Sustainable Cities and Communities |
+| SDG 13 | Climate Action                     |
 
 ---
 
-# 📜 License
+# 👨‍💻 Contributors
 
-This project is licensed under the **MIT License**.
+<table>
 
-Feel free to use, modify, and distribute this project for educational and research purposes.
+<tr>
+
+<td align="center">
+
+<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+
+<br>
+
+<b>Shayan Akhtar Abedeen</b>
+
+</td>
+
+<td align="center">
+
+<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+
+<br>
+
+<b>Aman Singh</b>
+
+</td>
+
+<td align="center">
+
+<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+
+<br>
+
+<b>Aryan Singh</b>
+
+</td>
+
+</tr>
+
+</table>
 
 ---
+
+# ⭐ Support
+
+If this project helped you,
+
+give it a ⭐ on GitHub.
 
 <p align="center">
 
-⭐ If you found this project useful, consider giving it a star!
+<img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="120">
 
 </p>
-
-
-Made with ❤️ for Smart Cities & SDG 3, 11, 13
-
-
-
-
