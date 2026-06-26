@@ -1,60 +1,34 @@
+````markdown
+<div align="center">
 
-# <div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&height=320&color=0:00C9FF,100:92FE9D&text=Air%20Quality%20Analytics&fontColor=ffffff&fontSize=48&animation=fadeIn&fontAlignY=38"/>
 
 # 🌍 Air Quality Analytics & AQI Forecasting Platform
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&size=30&duration=3000&pause=1000&color=00BFFF&center=true&vCenter=true&width=900&lines=Air+Quality+Analytics+Platform;Machine+Learning+Powered+AQI+Forecasting;Random+Forest+%7C+XGBoost+%7C+Prophet;Smart+Cities+Mission+%7C+SDG+3+11+13"/>
+### *Predicting Tomorrow's Air Before Tomorrow Arrives*
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=24&pause=1000&color=00C9FF&center=true&vCenter=true&width=900&lines=Machine+Learning+Powered+AQI+Forecasting;Random+Forest+%7C+XGBoost+%7C+Prophet;Interactive+Streamlit+Dashboard;Smart+Cities+Mission+%7C+SDG+3+11+13"/>
+
+<br>
+
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Scikit Learn](https://img.shields.io/badge/ScikitLearn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-ML-00A86B?style=for-the-badge)
+![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75?style=for-the-badge&logo=plotly)
+![MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+
+<br>
+
+![Stars](https://img.shields.io/github/stars/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
+
+![Forks](https://img.shields.io/github/forks/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
+
+![Issues](https://img.shields.io/github/issues/shayan-ing/air-quality-analytics-aqi-forecasting?style=for-the-badge)
+
+![Visitors](https://komarev.com/ghpvc/?username=shayan-ing&style=for-the-badge&color=blue)
 
 </div>
-
----
-<!-- Animated Header -->
-
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=250&section=header&text=Air%20Quality%20Analytics&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=40"/>
-
-</div>
-
-
-<div align="center">
-
-<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&size=28&duration=3000&pause=1000&color=00C9FF&center=true&vCenter=true&width=900&lines=🌍+Air+Quality+Analytics+%26+AQI+Forecasting;📈+Machine+Learning+Powered+Predictions;⚡+Interactive+Streamlit+Dashboard;🛰️+Turning+Pollution+Data+Into+Insights" />
-
-</div>
-
-
-
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)
-
-![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-
-![XGBoost](https://img.shields.io/badge/XGBoost-Model-00A86B?style=for-the-badge)
-
-![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
-
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas)
-
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-
-</div>
-
-
-
-<div align="center">
-
-![Stars](https://img.shields.io/github/stars/username/AirQualityProject?style=for-the-badge)
-
-![Forks](https://img.shields.io/github/forks/username/AirQualityProject?style=for-the-badge)
-
-![Issues](https://img.shields.io/github/issues/username/AirQualityProject?style=for-the-badge)
-
-![Visitors](https://komarev.com/ghpvc/?username=username&style=for-the-badge&color=blue)
-
-</div>
-
 
 ---
 
@@ -62,31 +36,58 @@
 
 ### 🌫️ Pollution Never Sleeps. Neither Does Data.
 
-<img width="700" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnN5c2c4dXhwbm1zN2JjOWF3eDFnM3ZibTJ2aGR6MzN5Nm5vYjB1ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0HlBO7eyXzSZkJri/giphy.gif">
+<img width="800" src="assets/dashboard_preview.gif">
 
 </div>
 
 ---
 
----
-
 # 📌 Overview
 
-> Predicting tomorrow's air before tomorrow arrives.
+Air pollution remains one of the world's most critical environmental challenges, affecting millions of people annually.
 
-Air pollution threatens millions of lives every year.
+This project presents an **AI-powered Air Quality Analytics Platform** designed for intelligent pollution monitoring, forecasting, and decision-making.
 
-This project provides an **AI-powered Air Quality Analytics Platform** capable of
+### ✨ Key Features
 
-✅ Historical Analysis
+- ✅ Historical AQI Analysis
+- ✅ Pollution Trend Detection
+- ✅ AQI Forecasting
+- ✅ Interactive Streamlit Dashboard
+- ✅ Health Advisory Generation
+- ✅ Feature Importance Analysis
+- ✅ Time Series Forecasting
+- ✅ Smart City Decision Support
 
-✅ AQI Forecasting
+---
 
-✅ Pollution Pattern Detection
+# 🎯 Objectives
 
-✅ Health Advisory Generation
+- Predict future AQI values accurately
+- Analyze pollution trends over time
+- Assist governments and citizens
+- Support climate resilience initiatives
+- Promote data-driven environmental awareness
 
-✅ Interactive Dashboard Visualization
+---
+
+# 🧠 Machine Learning Models
+
+| Model | MAE ↓ | RMSE ↓ | R² Score ↑ |
+|-------|-------|--------|------------|
+| 🌲 Random Forest | **0.0503** | **0.1656** | **0.999999** |
+| 🚀 XGBoost | 0.4436 | 0.7344 | 0.999983 |
+| 🔮 Prophet | 36.9273 | 48.4374 | 0.926510 |
+
+---
+
+# 🏆 Best Performing Model
+
+| Model | Status |
+|-------|--------|
+| 🌲 Random Forest | ⭐ Best Overall |
+| 🚀 XGBoost | ⚡ Competitive |
+| 🔮 Prophet | 📈 Suitable for Long-Term Forecasting |
 
 ---
 
@@ -94,19 +95,9 @@ This project provides an **AI-powered Air Quality Analytics Platform** capable o
 
 <p align="center">
 
-<img width="900" src="assets/dashboard_preview.gif">
+<img src="assets/dashboard_preview.gif" width="900">
 
 </p>
-
----
-
-# 🧠 Machine Learning Models
-
-| Model            | R² Score | MAE     | RMSE    |
-| ---------------- | -------- | ------- | ------- |
-| 🌲 Random Forest | 0.999999 | 0.0503  | 0.1656  |
-| 🚀 XGBoost       | 0.999983 | 0.4436  | 0.7344  |
-| 🔮 Prophet       | 0.926510 | 36.9273 | 48.4374 |
 
 ---
 
@@ -114,7 +105,7 @@ This project provides an **AI-powered Air Quality Analytics Platform** capable o
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=python,sklearn,tensorflow,git,github,vscode"/>
+<img src="https://skillicons.dev/icons?i=python,sklearn,pandas,numpy,git,github,vscode"/>
 
 </div>
 
@@ -123,80 +114,44 @@ This project provides an **AI-powered Air Quality Analytics Platform** capable o
 # 🔄 Workflow
 
 ```mermaid
-flowchart LR
 
+flowchart LR
 
 A[Raw AQI Dataset]
 
 -->
 
-B[EDA]
-
+B[Exploratory Data Analysis]
 
 -->
 
 C[Feature Engineering]
 
-
 -->
 
 D[Random Forest]
-
 
 -->
 
 E[XGBoost]
 
-
 -->
 
 F[Prophet]
 
+-->
+
+G[Model Evaluation]
 
 -->
 
-G[Model Comparison]
-
+H[Forecasting]
 
 -->
 
-H[Streamlit Dashboard]
-```
+I[Streamlit Dashboard]
 
----
-
-# 📂 Repository Structure
-
-```text
-AirQualityProject/
-
-
-├── data/
-
-
-├── notebooks/
-
-
-├── dashboard/
-
-
-├── models/
-
-
-├── reports/
-
-
-├── presentation/
-
-
-├── assets/
-
-
-├── requirements.txt
-
-
-└── README.md
-```
+````
 
 ---
 
@@ -206,7 +161,7 @@ AirQualityProject/
 
 <summary>🌍 AQI Gauge Meter</summary>
 
-Displays current AQI with dynamic color zones.
+Displays real-time AQI levels using dynamic color-coded indicators.
 
 </details>
 
@@ -214,7 +169,7 @@ Displays current AQI with dynamic color zones.
 
 <summary>📈 Historical Trends</summary>
 
-Interactive Plotly charts.
+Visualize pollution patterns using interactive Plotly charts.
 
 </details>
 
@@ -222,7 +177,7 @@ Interactive Plotly charts.
 
 <summary>🚨 Health Advisory</summary>
 
-Personalized health recommendations.
+Receive personalized recommendations based on AQI levels.
 
 </details>
 
@@ -230,13 +185,45 @@ Personalized health recommendations.
 
 <summary>🔮 AQI Prediction</summary>
 
-Compare RF, XGBoost and Prophet outputs.
+Compare predictions from Random Forest, XGBoost, and Prophet.
 
 </details>
 
 ---
 
-# 🖼 Screenshots
+# 📂 Repository Structure
+
+```text
+
+AirQualityAnalytics&Pollution Forecasting/
+
+├── assets/
+
+├── dashboard/
+
+├── data/
+
+├── models/
+
+├── notebooks/
+
+├── presentation/
+
+├── reports/
+
+├── screenshots/
+
+├── requirements.txt
+
+├── LICENSE
+
+└── README.md
+
+```
+
+---
+
+# 📷 Screenshots
 
 ### Dashboard
 
@@ -246,13 +233,17 @@ Compare RF, XGBoost and Prophet outputs.
 
 </p>
 
-### Forecast
+---
+
+### Forecast Results
 
 <p align="center">
 
 <img src="screenshots/forecast.png" width="900">
 
 </p>
+
+---
 
 ### Feature Importance
 
@@ -267,13 +258,13 @@ Compare RF, XGBoost and Prophet outputs.
 # 🚀 Installation
 
 ```bash
-git clone https://github.com/yourusername/AirQualityProject.git
 
+git clone https://github.com/shayan-ing/air-quality-analytics-aqi-forecasting.git
 
-cd AirQualityProject
-
+cd air-quality-analytics-aqi-forecasting
 
 pip install -r requirements.txt
+
 ```
 
 ---
@@ -281,7 +272,9 @@ pip install -r requirements.txt
 # ▶ Run Dashboard
 
 ```bash
+
 streamlit run dashboard/app.py
+
 ```
 
 ---
@@ -296,6 +289,12 @@ streamlit run dashboard/app.py
 
 ---
 
+# 🔍 Keywords
+
+Air Quality Analytics • AQI Forecasting • Air Pollution Prediction • Machine Learning • Random Forest • XGBoost • Prophet • Streamlit Dashboard • Climate Change • Smart Cities • Environmental Monitoring • SDG 3 • SDG 11 • SDG 13 • Time Series Forecasting
+
+---
+
 # 👨‍💻 Contributors
 
 <table>
@@ -304,31 +303,43 @@ streamlit run dashboard/app.py
 
 <td align="center">
 
-<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+<a href="https://github.com/shayan-ing">
+
+<img src="https://github.com/shayan-ing.png" width="120">
 
 <br>
 
 <b>Shayan Akhtar Abedeen</b>
 
+</a>
+
 </td>
 
 <td align="center">
 
-<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+<a href="https://github.com/Amanxcoder">
+
+<img src="https://github.com/Amanxcoder.png" width="120">
 
 <br>
 
 <b>Aman Singh</b>
 
+</a>
+
 </td>
 
 <td align="center">
 
-<img src="https://avatars.githubusercontent.com/u/9919?v=4" width="100">
+<a href="https://github.com/aryansingh6199">
+
+<img src="https://github.com/aryansingh6199.png" width="120">
 
 <br>
 
 <b>Aryan Singh</b>
+
+</a>
 
 </td>
 
@@ -340,12 +351,24 @@ streamlit run dashboard/app.py
 
 # ⭐ Support
 
-If this project helped you,
+If you found this project useful,
 
-give it a ⭐ on GitHub.
+consider giving it a ⭐ on GitHub.
 
 <p align="center">
 
 <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="120">
 
 </p>
+
+---
+
+<div align="center">
+
+### 🌍 Cleaner Air Begins With Better Predictions
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=120&section=footer"/>
+
+</div>
+```
+
