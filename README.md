@@ -1,4 +1,4 @@
-````markdown
+
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&height=320&color=0:00C9FF,100:92FE9D&text=Air%20Quality%20Analytics&fontColor=ffffff&fontSize=48&animation=fadeIn&fontAlignY=38"/>
