@@ -1,8 +1,10 @@
 import { Bell, UserCircle } from "lucide-react";
+import { Menu } from "lucide-react";
+import { useSidebar } from "../../contexts/SidebarContext";
 
 function Navbar() {
+  const { toggleSidebar } = useSidebar();
   const today = new Date();
-
   const date = today.toLocaleDateString("en-US", {
     weekday: "long",
     day: "numeric",
@@ -15,15 +17,26 @@ function Navbar() {
 
       <div className="h-full flex items-center justify-between px-10">
 
-        <div>
-          <p className="text-sm text-slate-400">
-            {date}
-          </p>
+        <div className="flex items-center gap-4">
 
-          <h2 className="text-xl font-semibold mt-1">
-            Air Quality Dashboard
-          </h2>
-        </div>
+  <button
+    onClick={toggleSidebar}
+    className="p-2 rounded-lg hover:bg-slate-800 transition"
+  >
+    <Menu size={24} />
+  </button>
+
+  <div>
+    <p className="text-sm text-slate-400">
+      {date}
+    </p>
+
+    <h2 className="text-xl font-semibold mt-1">
+      Air Quality Dashboard
+    </h2>
+  </div>
+
+</div>
 
         <div className="flex items-center gap-6">
 
