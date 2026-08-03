@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -5,65 +6,98 @@ import {
   Popup,
 } from "react-leaflet";
 
-const stations = [
-  {
-    city: "Delhi",
-    aqi: 182,
-    position: [28.6139, 77.2090],
-  },
-  {
-    city: "Noida",
-    aqi: 164,
-    position: [28.5355, 77.3910],
-  },
-  {
-    city: "Ghaziabad",
-    aqi: 149,
-    position: [28.6692, 77.4538],
-  },
-  {
-    city: "Faridabad",
-    aqi: 136,
-    position: [28.4089, 77.3178],
-  },
-];
+import { fetchAQIData } from "../../services/api";
 
 function AirQualityMap() {
+
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+
+    const loadStations = async () => {
+
+      const data = await fetchAQIData();
+
+      if (data) {
+        setStations(data.monitoring_stations);
+      }
+
+    };
+
+    loadStations();
+
+  }, []);
+
+  if (stations.length === 0) {
+
+    return (
+      <div className="h-[700px] flex items-center justify-center rounded-3xl border border-slate-800 bg-slate-900">
+        Loading Map...
+      </div>
+    );
+
+  }
+
   return (
+
     <div className="h-[700px] rounded-3xl overflow-hidden border border-slate-800">
 
       <MapContainer
-        center={[28.6139, 77.2090]}
-        zoom={10}
+        center={[
+          stations[0].latitude,
+          stations[0].longitude,
+        ]}
+        zoom={11}
         className="h-full w-full"
       >
 
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {stations.map((station) => (
+
           <Marker
-            key={station.city}
-            position={station.position}
+            key={station.name}
+            position={[
+              station.latitude,
+              station.longitude,
+            ]}
           >
+
             <Popup>
 
-              <h3 className="font-bold">
-                {station.city}
+              <h3 className="font-bold text-lg">
+                {station.name}
               </h3>
 
-              AQI: {station.aqi}
+              <p>
+
+                AQI :
+                <strong> {station.aqi}</strong>
+
+              </p>
+
+              <p>
+
+                Status :
+                <strong> {station.status}</strong>
+
+              </p>
 
             </Popup>
+
           </Marker>
+
         ))}
 
       </MapContainer>
 
     </div>
+
   );
+
 }
 
 export default AirQualityMap;

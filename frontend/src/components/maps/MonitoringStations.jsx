@@ -1,44 +1,51 @@
+import { useEffect, useState } from "react";
 import { MapPin, Clock } from "lucide-react";
-
-const stations = [
-  {
-    name: "Delhi Central",
-    aqi: 142,
-    updated: "2 min ago",
-    status: "Online",
-    color: "bg-green-500",
-  },
-  {
-    name: "Noida Sector 62",
-    aqi: 126,
-    updated: "5 min ago",
-    status: "Online",
-    color: "bg-green-500",
-  },
-  {
-    name: "Ghaziabad",
-    aqi: 171,
-    updated: "1 min ago",
-    status: "Online",
-    color: "bg-red-500",
-  },
-  {
-    name: "Faridabad",
-    aqi: 118,
-    updated: "7 min ago",
-    status: "Online",
-    color: "bg-yellow-400",
-  },
-];
+import { fetchAQIData } from "../../services/api";
 
 function MonitoringStations() {
-  return (
-    <div className="space-y-4">
+  const [stations, setStations] = useState([]);
 
-      {stations.map((station, index) => (
+  useEffect(() => {
+    const loadStations = async () => {
+      const data = await fetchAQIData();
+
+      if (data) {
+        setStations(data.monitoring_stations);
+      }
+    };
+
+    loadStations();
+  }, []);
+
+  const getColor = (status) => {
+    switch (status) {
+      case "Good":
+        return "bg-green-500";
+
+      case "Fair":
+        return "bg-cyan-500";
+
+      case "Moderate":
+        return "bg-yellow-500";
+
+      case "Poor":
+        return "bg-orange-500";
+
+      case "Very Poor":
+        return "bg-red-500";
+
+      default:
+        return "bg-slate-500";
+    }
+  };
+
+  return (
+    <div className="space-y-4 max-h-[520px] overflow-y-auto pr-2">
+
+      {stations.map((station) => (
 
         <div
-          key={index}
+          key={station.name}
           className="rounded-xl border border-slate-800 bg-slate-900 p-4 hover:border-cyan-500/30 transition"
         >
 
@@ -62,7 +69,9 @@ function MonitoringStations() {
               <div className="mt-2 flex items-center gap-2 text-sm">
 
                 <span
-                  className={`h-2 w-2 rounded-full ${station.color}`}
+                  className={`h-2 w-2 rounded-full ${getColor(
+                    station.status
+                  )}`}
                 />
 
                 <span className="text-slate-300">
@@ -75,7 +84,7 @@ function MonitoringStations() {
 
                 <Clock size={13} />
 
-                Updated {station.updated}
+                Live Monitoring
 
               </div>
 

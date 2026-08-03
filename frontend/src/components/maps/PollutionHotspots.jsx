@@ -1,31 +1,42 @@
-const hotspots = [
-  {
-    city: "Delhi",
-    aqi: 182,
-    status: "Very Poor",
-    color: "bg-red-500",
-  },
-  {
-    city: "Noida",
-    aqi: 168,
-    status: "Poor",
-    color: "bg-orange-500",
-  },
-  {
-    city: "Ghaziabad",
-    aqi: 149,
-    status: "Moderate",
-    color: "bg-yellow-500",
-  },
-  {
-    city: "Faridabad",
-    aqi: 134,
-    status: "Moderate",
-    color: "bg-yellow-500",
-  },
-];
+import { useEffect, useState } from "react";
+import { fetchAQIData } from "../../services/api";
 
 function PollutionHotspots() {
+  const [hotspots, setHotspots] = useState([]);
+
+  useEffect(() => {
+    const loadHotspots = async () => {
+      const data = await fetchAQIData();
+
+      if (data) {
+        const sortedStations = [...data.monitoring_stations].sort(
+          (a, b) => b.aqi - a.aqi
+        );
+
+        setHotspots(sortedStations);
+      }
+    };
+
+    loadHotspots();
+  }, []);
+
+  const getColor = (status) => {
+    switch (status) {
+      case "Good":
+        return "bg-green-500";
+      case "Fair":
+        return "bg-cyan-500";
+      case "Moderate":
+        return "bg-yellow-500";
+      case "Poor":
+        return "bg-orange-500";
+      case "Very Poor":
+        return "bg-red-500";
+      default:
+        return "bg-slate-500";
+    }
+  };
+
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 h-full">
 
@@ -42,20 +53,20 @@ function PollutionHotspots() {
         {hotspots.map((spot) => (
 
           <div
-            key={spot.city}
+            key={spot.name}
             className="flex items-center justify-between rounded-2xl bg-slate-800/50 p-4"
           >
 
             <div className="flex items-center gap-4">
 
               <div
-                className={`h-3 w-3 rounded-full ${spot.color}`}
+                className={`h-3 w-3 rounded-full ${getColor(spot.status)}`}
               />
 
               <div>
 
                 <p className="font-semibold">
-                  {spot.city}
+                  {spot.name}
                 </p>
 
                 <p className="text-sm text-slate-400">

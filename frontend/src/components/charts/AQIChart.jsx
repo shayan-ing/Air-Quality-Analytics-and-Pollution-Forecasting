@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -8,21 +9,27 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { day: "Mon", aqi: 118 },
-  { day: "Tue", aqi: 121 },
-  { day: "Wed", aqi: 132 },
-  { day: "Thu", aqi: 126 },
-  { day: "Fri", aqi: 141 },
-  { day: "Sat", aqi: 137 },
-  { day: "Sun", aqi: 129 },
-];
+import { fetchAQIData } from "../../services/api";
 
 function AQIChart() {
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const loadAQI = async () => {
+      const data = await fetchAQIData();
+
+      if (data) {
+        setHistory(data.aqi_history);
+      }
+    };
+
+    loadAQI();
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
-        data={data}
+        data={history}
         margin={{
           top: 20,
           right: 20,
@@ -30,7 +37,6 @@ function AQIChart() {
           bottom: 10,
         }}
       >
-        {/* Gradient */}
         <defs>
           <linearGradient
             id="aqiGradient"
@@ -44,7 +50,6 @@ function AQIChart() {
               stopColor="#06b6d4"
               stopOpacity={0.45}
             />
-
             <stop
               offset="95%"
               stopColor="#06b6d4"
@@ -67,16 +72,15 @@ function AQIChart() {
         />
 
         <YAxis
-          tick={{ fill: "#94a3b8" }}
-          axisLine={false}
-          tickLine={false}
-        />
+  domain={[0, 400]}
+  ticks={[0, 50, 100, 150, 200, 250, 300, 350, 400]}
+  tick={{ fill: "#94a3b8" }}
+  axisLine={false}
+  tickLine={false}
+/>
 
         <Tooltip
-          cursor={{
-            stroke: "#06b6d4",
-            strokeWidth: 2,
-          }}
+          formatter={(value) => [`${value}`, "AQI"]}
           contentStyle={{
             backgroundColor: "#0f172a",
             border: "1px solid #334155",

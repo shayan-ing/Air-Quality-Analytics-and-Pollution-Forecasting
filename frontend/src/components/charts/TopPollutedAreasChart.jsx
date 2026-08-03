@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -6,25 +8,57 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Cell,
 } from "recharts";
 
-const data = [
-  { city: "Delhi", AQI: 182 },
-  { city: "Noida", AQI: 165 },
-  { city: "Ghaziabad", AQI: 149 },
-  { city: "Gurgaon", AQI: 138 },
-  { city: "Faridabad", AQI: 126 },
+import { fetchAQIData } from "../../services/api";
+
+const COLORS = [
+  "#22d3ee",
+  "#06b6d4",
+  "#3b82f6",
+  "#8b5cf6",
+  "#a855f7",
+  "#ec4899",
+  "#f97316",
 ];
 
 function TopPollutedAreasChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await fetchAQIData();
+
+      if (!response) return;
+
+      const stations = [...response.monitoring_stations]
+        .sort((a, b) => b.aqi - a.aqi)
+        .map((station) => ({
+          city: station.name,
+          AQI: station.aqi,
+        }));
+
+      setData(stations);
+    };
+
+    loadData();
+  }, []);
+
   return (
     <div className="h-[350px] w-full">
 
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
 
         <BarChart
-          layout="vertical"
           data={data}
+          layout="vertical"
+          margin={{
+            top: 5,
+            right: 20,
+            left: 30,
+            bottom: 5,
+          }}
         >
 
           <CartesianGrid
@@ -38,12 +72,14 @@ function TopPollutedAreasChart() {
           />
 
           <YAxis
-            dataKey="city"
             type="category"
+            dataKey="city"
             stroke="#94a3b8"
+            width={110}
           />
 
           <Tooltip
+            formatter={(value) => [`${value}`, "AQI"]}
             contentStyle={{
               backgroundColor: "#0f172a",
               border: "1px solid #334155",
@@ -53,9 +89,15 @@ function TopPollutedAreasChart() {
 
           <Bar
             dataKey="AQI"
-            fill="#22d3ee"
-            radius={[0,8,8,0]}
-          />
+            radius={[0, 8, 8, 0]}
+          >
+            {data.map((_, index) => (
+              <Cell
+                key={index}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Bar>
 
         </BarChart>
 

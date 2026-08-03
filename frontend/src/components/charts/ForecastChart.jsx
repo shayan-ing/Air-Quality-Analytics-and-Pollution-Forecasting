@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   AreaChart,
   Area,
@@ -8,20 +9,26 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { day: "Mon", temp: 31 },
-  { day: "Tue", temp: 33 },
-  { day: "Wed", temp: 35 },
-  { day: "Thu", temp: 34 },
-  { day: "Fri", temp: 36 },
-  { day: "Sat", temp: 37 },
-  { day: "Sun", temp: 35 },
-];
+import { fetchAQIData } from "../../services/api";
 
 function ForecastChart() {
+  const [forecast, setForecast] = useState([]);
+
+  useEffect(() => {
+    const loadForecast = async () => {
+      const data = await fetchAQIData();
+
+      if (data) {
+        setForecast(data.forecast);
+      }
+    };
+
+    loadForecast();
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={320}>
-      <AreaChart data={data}>
+      <AreaChart data={forecast}>
         <defs>
           <linearGradient id="forecast" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.7} />
@@ -49,6 +56,7 @@ function ForecastChart() {
             border: "1px solid #334155",
             borderRadius: "12px",
           }}
+          formatter={(value) => [`${value}°C`, "Temperature"]}
         />
 
         <Area

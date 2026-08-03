@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -9,13 +11,7 @@ import {
   Cell,
 } from "recharts";
 
-const data = [
-  { pollutant: "PM2.5", value: 78 },
-  { pollutant: "PM10", value: 115 },
-  { pollutant: "NO₂", value: 42 },
-  { pollutant: "SO₂", value: 18 },
-  { pollutant: "CO", value: 26 },
-];
+import { fetchAQIData } from "../../services/api";
 
 const colors = [
   "#22d3ee",
@@ -26,10 +22,55 @@ const colors = [
 ];
 
 function PollutantComparisonChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const aqiData = await fetchAQIData();
+
+      if (!aqiData) return;
+
+      setData([
+        {
+          pollutant: "PM2.5",
+          value: Number(aqiData.pm2_5.toFixed(2)),
+        },
+        {
+          pollutant: "PM10",
+          value: Number(aqiData.pm10.toFixed(2)),
+        },
+        {
+          pollutant: "NO₂",
+          value: Number(aqiData.no2.toFixed(2)),
+        },
+        {
+          pollutant: "O₃",
+          value: Number(aqiData.o3.toFixed(2)),
+        },
+        {
+          pollutant: "CO (÷20)",
+          value: Number((aqiData.co / 20).toFixed(2)),
+        },
+      ]);
+    };
+
+    loadData();
+  }, []);
+
   return (
     <div className="h-[350px] w-full">
+
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
+
+        <BarChart
+          data={data}
+          margin={{
+            top: 20,
+            right: 20,
+            left: 0,
+            bottom: 10,
+          }}
+        >
 
           <CartesianGrid
             stroke="#1e293b"
@@ -39,32 +80,57 @@ function PollutantComparisonChart() {
           <XAxis
             dataKey="pollutant"
             stroke="#94a3b8"
+            axisLine={false}
+            tickLine={false}
           />
 
-          <YAxis stroke="#94a3b8" />
+          <YAxis
+            stroke="#94a3b8"
+            axisLine={false}
+            tickLine={false}
+          />
 
           <Tooltip
+            formatter={(value, _, props) => {
+              const pollutant = props.payload.pollutant;
+
+              if (pollutant === "CO (÷20)") {
+                return [
+                  `${(value * 20).toFixed(2)} µg/m³`,
+                  "CO (Actual)",
+                ];
+              }
+
+              return [
+                `${value} µg/m³`,
+                pollutant,
+              ];
+            }}
             contentStyle={{
               backgroundColor: "#0f172a",
               border: "1px solid #334155",
               borderRadius: "12px",
+              color: "#fff",
             }}
           />
 
           <Bar
             dataKey="value"
             radius={[8, 8, 0, 0]}
+            animationDuration={1500}
           >
             {data.map((entry, index) => (
               <Cell
-                key={index}
+                key={entry.pollutant}
                 fill={colors[index]}
               />
             ))}
           </Bar>
 
         </BarChart>
+
       </ResponsiveContainer>
+
     </div>
   );
 }

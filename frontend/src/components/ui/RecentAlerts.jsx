@@ -5,38 +5,34 @@ import {
   CloudRain,
 } from "lucide-react";
 
-const alerts = [
-  {
-    id: 1,
-    icon: AlertTriangle,
-    title: "High PM10 detected",
-    message: "PM10 concentration increased by 18%",
-    color: "text-red-400",
-  },
-  {
-    id: 2,
-    icon: Wind,
-    title: "Strong Winds",
-    message: "Wind speed expected to reach 24 km/h",
-    color: "text-cyan-400",
-  },
-  {
-    id: 3,
-    icon: CloudRain,
-    title: "Rain Expected",
-    message: "AQI may improve during evening",
-    color: "text-blue-400",
-  },
-  {
-    id: 4,
-    icon: CheckCircle2,
-    title: "Air Quality Stable",
-    message: "No hazardous pollutants detected",
-    color: "text-green-400",
-  },
-];
+function RecentAlerts({ alerts = [] }) {
 
-function RecentAlerts() {
+  const getIcon = (title) => {
+
+    if (title.includes("PM"))
+      return {
+        icon: AlertTriangle,
+        color: "text-red-400",
+      };
+
+    if (title.includes("Wind"))
+      return {
+        icon: Wind,
+        color: "text-cyan-400",
+      };
+
+    if (title.includes("Rain"))
+      return {
+        icon: CloudRain,
+        color: "text-blue-400",
+      };
+
+    return {
+      icon: CheckCircle2,
+      color: "text-green-400",
+    };
+  };
+
   return (
     <div className="rounded-3xl bg-slate-900 border border-slate-800 p-8 shadow-xl">
 
@@ -50,15 +46,16 @@ function RecentAlerts() {
 
       <div className="space-y-5">
 
-        {alerts.map((alert) => {
-          const Icon = alert.icon;
+        {alerts.map((alert, index) => {
+
+          const { icon: Icon, color } = getIcon(alert.title);
 
           return (
             <div
-              key={alert.id}
+              key={index}
               className="flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-950 p-5 hover:border-cyan-500/40 transition"
             >
-              <div className={`${alert.color}`}>
+              <div className={color}>
                 <Icon size={28} />
               </div>
 
@@ -71,11 +68,14 @@ function RecentAlerts() {
                   {alert.message}
                 </p>
               </div>
+
             </div>
           );
+
         })}
 
       </div>
+
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   ResponsiveContainer,
   PieChart,
@@ -7,28 +9,7 @@ import {
   Legend,
 } from "recharts";
 
-const data = [
-  {
-    name: "Good",
-    value: 35,
-  },
-  {
-    name: "Moderate",
-    value: 30,
-  },
-  {
-    name: "Poor",
-    value: 20,
-  },
-  {
-    name: "Very Poor",
-    value: 10,
-  },
-  {
-    name: "Severe",
-    value: 5,
-  },
-];
+import { fetchAQIData } from "../../services/api";
 
 const COLORS = [
   "#22c55e",
@@ -36,10 +17,71 @@ const COLORS = [
   "#f59e0b",
   "#ef4444",
   "#7c3aed",
+  "#7f1d1d",
 ];
 
 function AQIDistributionChart() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+
+    const loadData = async () => {
+
+      const aqiData = await fetchAQIData();
+
+      if (!aqiData) return;
+
+      const counts = {
+        Good: 0,
+        Satisfactory: 0,
+        Moderate: 0,
+        Poor: 0,
+        "Very Poor": 0,
+        Severe: 0,
+      };
+
+      aqiData.aqi_history.forEach((item) => {
+
+        const value = item.aqi;
+
+        if (value <= 50)
+          counts.Good++;
+
+        else if (value <= 100)
+          counts.Satisfactory++;
+
+        else if (value <= 200)
+          counts.Moderate++;
+
+        else if (value <= 300)
+          counts.Poor++;
+
+        else if (value <= 400)
+          counts["Very Poor"]++;
+
+        else
+          counts.Severe++;
+
+      });
+
+      const chartData = Object.entries(counts)
+        .filter(([_, value]) => value > 0)
+        .map(([name, value]) => ({
+          name,
+          value,
+        }));
+
+      setData(chartData);
+
+    };
+
+    loadData();
+
+  }, []);
+
   return (
+
     <div className="h-[350px] w-full">
 
       <ResponsiveContainer width="100%" height="100%">
@@ -56,10 +98,12 @@ function AQIDistributionChart() {
           >
 
             {data.map((entry, index) => (
+
               <Cell
                 key={index}
                 fill={COLORS[index]}
               />
+
             ))}
 
           </Pie>
@@ -79,7 +123,9 @@ function AQIDistributionChart() {
       </ResponsiveContainer>
 
     </div>
+
   );
+
 }
 
 export default AQIDistributionChart;

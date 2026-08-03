@@ -12,7 +12,49 @@ import PollutantTrendChart from "../components/charts/PollutantTrendChart";
 import AQIHeatmap from "../components/charts/AQIHeatmap";
 import TopPollutedAreasChart from "../components/charts/TopPollutedAreasChart";
 import AIInsightCard from "../components/cards/AIInsightCard";
+import { useEffect, useState } from "react";
+import { fetchAQIData } from "../services/api";
+import { exportAQIReport } from "../utils/exportReport";
 function Analytics() {
+  const [aqiData, setAqiData] = useState(null);
+
+useEffect(() => {
+  const loadAnalytics = async () => {
+    const data = await fetchAQIData();
+    setAqiData(data);
+  };
+
+  loadAnalytics();
+}, []);
+const history = aqiData?.aqi_history || [];
+
+const averageAQI =
+  history.length > 0
+    ? Math.round(
+        history.reduce((sum, item) => sum + item.aqi, 0) /
+          history.length
+      )
+    : "--";
+
+const highestAQI =
+  history.length > 0
+    ? history.reduce((a, b) =>
+        a.aqi > b.aqi ? a : b
+      )
+    : null;
+
+const lowestAQI =
+  history.length > 0
+    ? history.reduce((a, b) =>
+        a.aqi < b.aqi ? a : b
+      )
+    : null;
+
+const unhealthyDays =
+  history.filter((item) => item.aqi > 100).length;
+
+const poorDays =
+  history.filter((item) => item.aqi > 200).length;
   return (
     <div className="space-y-16">
 
@@ -71,13 +113,14 @@ function Analytics() {
 
     </div>
 
-    <button className="flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400">
-
-      <Download size={18} />
-
-      Export Report
-
-    </button>
+    <button
+  disabled={!aqiData}
+  onClick={() => exportAQIReport(aqiData)}
+  className="flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:opacity-50"
+>
+  <Download size={18} />
+  Export Report
+</button>
 
   </div>
 
@@ -90,39 +133,32 @@ function Analytics() {
   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
     <AnalyticsCard
-      title="Average AQI"
-      value="129"
-      subtitle="Monthly Average"
-      trend="+6%"
-      trendColor="text-green-400"
-    />
+  value={averageAQI}
+  subtitle="Monthly Average"
+  trend={`${unhealthyDays} Days`}
+  trendColor="text-cyan-400"
+/>
 
     <AnalyticsCard
-      title="Highest AQI"
-      value="182"
-      subtitle="Peak Pollution"
-      valueColor="text-red-400"
-      trend="Friday"
-      trendColor="text-red-400"
+      value={highestAQI?.aqi || "--"}
+subtitle="Highest Recorded"
+trend={highestAQI?.day || "--"}
+trendColor="text-red-400"
     />
+<AnalyticsCard
+  value={lowestAQI?.aqi || "--"}
+  subtitle="Lowest Recorded"
+  trend={lowestAQI?.day || "--"}
+  trendColor="text-green-400"
+/>
 
-    <AnalyticsCard
-      title="Lowest AQI"
-      value="76"
-      subtitle="Best Air Quality"
-      valueColor="text-green-400"
-      trend="Monday"
-      trendColor="text-green-400"
-    />
-
-    <AnalyticsCard
-      title="AQI Change"
-      value="-12%"
-      subtitle="Compared to Last Month"
-      valueColor="text-cyan-400"
-      trend="Improved"
-      trendColor="text-cyan-400"
-    />
+  <AnalyticsCard
+  value={poorDays}
+  subtitle="Poor AQI Days"
+  valueColor="text-orange-400"
+  trend="AQI > 200"
+  trendColor="text-orange-400"
+/>
 
   </div>
 

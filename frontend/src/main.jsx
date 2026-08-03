@@ -1,14 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+
+import "./index.css";
+import App from "./App.jsx";
+
 import { SidebarProvider } from "./contexts/SidebarContext";
+import { LocationProvider } from "./contexts/LocationContext";
+
 import "leaflet/dist/leaflet.css";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SidebarProvider>
-    <App />
-</SidebarProvider>
-  </StrictMode>,
-)
+    <LocationProvider>
+      <SidebarProvider>
+        <App />
+      </SidebarProvider>
+    </LocationProvider>
+  </StrictMode>
+);

@@ -1,13 +1,113 @@
+import { useEffect, useState } from "react";
+
 import {
   Brain,
-  TrendingDown,
   Wind,
-  CloudRain,
+  Thermometer,
   ShieldCheck,
+  Droplets,
 } from "lucide-react";
 
+import { fetchAQIData } from "../../services/api";
+
 function AIInsightCard() {
+
+  const [aqiData, setAqiData] = useState(null);
+
+  useEffect(() => {
+
+    const loadData = async () => {
+
+      const data = await fetchAQIData();
+
+      if (data) {
+        setAqiData(data);
+      }
+
+    };
+
+    loadData();
+
+  }, []);
+
+  if (!aqiData) {
+
+    return (
+      <div className="rounded-3xl border border-cyan-500/20 bg-slate-900 p-8">
+        Loading AI Insights...
+      </div>
+    );
+
+  }
+
+  const insights = [];
+
+  // AQI
+  if (aqiData.aqi_index <= 2) {
+
+    insights.push({
+      icon: ShieldCheck,
+      color: "text-green-400",
+      text: "Air quality is currently satisfactory for most outdoor activities.",
+    });
+
+  } else {
+
+    insights.push({
+      icon: ShieldCheck,
+      color: "text-red-400",
+      text: "Poor air quality detected. Limit prolonged outdoor exposure.",
+    });
+
+  }
+
+  // Wind
+  if (aqiData.wind_speed >= 4) {
+
+    insights.push({
+      icon: Wind,
+      color: "text-cyan-400",
+      text: `Wind speed of ${aqiData.wind_speed} m/s may help disperse pollutants.`,
+    });
+
+  } else {
+
+    insights.push({
+      icon: Wind,
+      color: "text-cyan-400",
+      text: `Low wind speed (${aqiData.wind_speed} m/s) may allow pollutants to accumulate.`,
+    });
+
+  }
+
+  // Temperature
+  insights.push({
+    icon: Thermometer,
+    color: "text-orange-400",
+    text: `Current temperature is ${Math.round(aqiData.temperature)}°C.`,
+  });
+
+  // Humidity
+  if (aqiData.humidity > 70) {
+
+    insights.push({
+      icon: Droplets,
+      color: "text-blue-400",
+      text: `Humidity is ${aqiData.humidity}%. Moist air may trap pollutants.`,
+    });
+
+  } else {
+
+    insights.push({
+      icon: Droplets,
+      color: "text-blue-400",
+      text: `Humidity is ${aqiData.humidity}%. Atmospheric conditions are stable.`,
+    });
+
+  }
+
   return (
+
     <div className="rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-slate-900 to-slate-950 p-8">
 
       <div className="flex items-center gap-3">
@@ -24,7 +124,7 @@ function AIInsightCard() {
           </h2>
 
           <p className="text-slate-400">
-            Generated from historical pollution trends
+            Generated from live environmental data
           </p>
 
         </div>
@@ -33,78 +133,52 @@ function AIInsightCard() {
 
       <div className="mt-8 space-y-5">
 
-        <div className="flex items-center gap-3">
+        {insights.map((item, index) => {
 
-          <TrendingDown
-            className="text-green-400"
-            size={20}
-          />
+          const Icon = item.icon;
 
-          <span>
-            AQI has decreased by
-            <span className="text-green-400 font-semibold">
-              {" "}12%
-            </span>
-            compared to last month.
-          </span>
+          return (
 
-        </div>
+            <div
+              key={index}
+              className="flex items-center gap-3"
+            >
 
-        <div className="flex items-center gap-3">
+              <Icon
+                size={20}
+                className={item.color}
+              />
 
-          <Wind
-            className="text-cyan-400"
-            size={20}
-          />
+              <span>{item.text}</span>
 
-          <span>
-            Higher wind speed helped disperse pollutants.
-          </span>
+            </div>
 
-        </div>
+          );
 
-        <div className="flex items-center gap-3">
-
-          <CloudRain
-            className="text-blue-400"
-            size={20}
-          />
-
-          <span>
-            Rain forecast indicates improved AQI tomorrow.
-          </span>
-
-        </div>
-
-        <div className="flex items-center gap-3">
-
-          <ShieldCheck
-            className="text-yellow-400"
-            size={20}
-          />
-
-          <span>
-            Outdoor activities are recommended before 5 PM.
-          </span>
-
-        </div>
+        })}
 
       </div>
 
-      <div className="mt-8 rounded-2xl bg-cyan-500/10 p-5 border border-cyan-500/20">
+      <div className="mt-8 rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-5">
 
         <p className="text-sm text-slate-400">
-          Prediction Confidence
+          Data Source
         </p>
 
-        <h2 className="mt-2 text-5xl font-bold text-cyan-400">
-          94%
+        <h2 className="mt-2 text-3xl font-bold text-cyan-400">
+          OpenWeather API
         </h2>
+
+        <p className="mt-2 text-slate-400">
+          Live environmental analysis
+        </p>
 
       </div>
 
     </div>
+
   );
+
 }
 
 export default AIInsightCard;

@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { fetchAQIData } from "../../services/api";
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,15 +11,42 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { pollutant: "PM2.5", value: 45 },
-  { pollutant: "PM10", value: 82 },
-  { pollutant: "NO₂", value: 28 },
-  { pollutant: "SO₂", value: 12 },
-  { pollutant: "CO", value: 8 },
-];
-
 function PollutantChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const aqiData = await fetchAQIData();
+
+      if (!aqiData) return;
+
+      setData([
+        {
+          pollutant: "PM2.5",
+          value: Number(aqiData.pm2_5.toFixed(2)),
+        },
+        {
+          pollutant: "PM10",
+          value: Number(aqiData.pm10.toFixed(2)),
+        },
+        {
+          pollutant: "NO₂",
+          value: Number(aqiData.no2.toFixed(2)),
+        },
+        {
+          pollutant: "O₃",
+          value: Number(aqiData.o3.toFixed(2)),
+        },
+        {
+          pollutant: "CO",
+          value: Number(aqiData.co.toFixed(2)),
+        },
+      ]);
+    };
+
+    loadData();
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={320}>
       <BarChart

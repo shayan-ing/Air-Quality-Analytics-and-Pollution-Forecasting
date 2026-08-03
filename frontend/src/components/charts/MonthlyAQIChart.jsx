@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   ResponsiveContainer,
   AreaChart,
@@ -8,19 +10,32 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { day: "1", aqi: 118 },
-  { day: "5", aqi: 122 },
-  { day: "10", aqi: 136 },
-  { day: "15", aqi: 129 },
-  { day: "20", aqi: 148 },
-  { day: "25", aqi: 140 },
-  { day: "30", aqi: 126 },
-];
+import { fetchAQIData } from "../../services/api";
 
 function MonthlyAQIChart() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+
+    const loadData = async () => {
+
+      const aqiData = await fetchAQIData();
+
+      if (!aqiData) return;
+
+      setData(aqiData.aqi_history);
+
+    };
+
+    loadData();
+
+  }, []);
+
   return (
-<div className="h-[380px] w-full">
+
+    <div className="h-[380px] w-full">
+
       <ResponsiveContainer width="100%" height="100%">
 
         <AreaChart
@@ -71,9 +86,11 @@ function MonthlyAQIChart() {
 
           <YAxis
             stroke="#94a3b8"
+            domain={[0, 400]}
           />
 
           <Tooltip
+            formatter={(value) => [`${value}`, "AQI"]}
             contentStyle={{
               background: "#0f172a",
               border: "1px solid #334155",
@@ -101,7 +118,9 @@ function MonthlyAQIChart() {
       </ResponsiveContainer>
 
     </div>
+
   );
+
 }
 
 export default MonthlyAQIChart;
