@@ -175,11 +175,26 @@ def get_aqi_data(city=None, lat=None, lon=None):
             added_days.add(date)
 
             forecast.append(
-                {
-                    "day": date[5:],  # MM-DD
-                    "temp": round(item["main"]["temp"]),
-                }
-            )
+    {
+        "day": date[5:],
+
+        "temp": round(
+            item["main"]["temp"]
+        ),
+
+        "humidity": item["main"]["humidity"],
+
+        "wind_speed": round(
+            item["wind"]["speed"],
+            2
+        ),
+
+        "visibility": round(
+            item.get("visibility", 5000) / 1000,
+            2
+        ),
+    }
+)
 
         if len(forecast) == 5:
             break
@@ -342,6 +357,12 @@ def get_aqi_data(city=None, lat=None, lon=None):
         "no2": round(components["no2"], 2),
 
         "o3": round(components["o3"], 2),
+        "so2": round(components["so2"], 2),
+
+        "visibility": round(
+         weather_data.get("visibility", 5000) / 1000,
+         2
+    ),
 
         "forecast": forecast,
 

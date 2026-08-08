@@ -8,23 +8,27 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { day: "Today", temp: 34 },
-  { day: "Thu", temp: 33 },
-  { day: "Fri", temp: 32 },
-  { day: "Sat", temp: 31 },
-  { day: "Sun", temp: 32 },
-  { day: "Mon", temp: 34 },
-  { day: "Tue", temp: 35 },
-];
+function WeatherForecastChart({ forecast = [] }) {
 
-function WeatherForecastChart() {
+  const data = forecast.map((item) => ({
+    day: item.day,
+    temp: item.temperature,
+  }));
+
   return (
-    <div className="h-[360px] w-full">
+    <div className="h-[380px] w-full">
 
       <ResponsiveContainer width="100%" height="100%">
 
-        <LineChart data={data}>
+        <LineChart
+          data={data}
+          margin={{
+            top: 10,
+            right: 20,
+            left: 0,
+            bottom: 0,
+          }}
+        >
 
           <CartesianGrid
             stroke="#1e293b"
@@ -38,6 +42,7 @@ function WeatherForecastChart() {
 
           <YAxis
             stroke="#94a3b8"
+            domain={["auto", "auto"]}
           />
 
           <Tooltip
@@ -46,6 +51,10 @@ function WeatherForecastChart() {
               border: "1px solid #334155",
               borderRadius: "12px",
             }}
+            formatter={(value) => [
+              `${value}°C`,
+              "Temperature",
+            ]}
           />
 
           <Line
@@ -56,6 +65,9 @@ function WeatherForecastChart() {
             dot={{
               r: 5,
               fill: "#f97316",
+            }}
+            activeDot={{
+              r: 7,
             }}
           />
 

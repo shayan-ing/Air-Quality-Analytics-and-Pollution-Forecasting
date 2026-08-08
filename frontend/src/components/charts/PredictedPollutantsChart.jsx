@@ -9,14 +9,6 @@ import {
   Cell,
 } from "recharts";
 
-const data = [
-  { name: "PM2.5", value: 82 },
-  { name: "PM10", value: 128 },
-  { name: "NO₂", value: 44 },
-  { name: "SO₂", value: 20 },
-  { name: "CO", value: 2.1 },
-];
-
 const colors = [
   "#22d3ee",
   "#06b6d4",
@@ -25,13 +17,46 @@ const colors = [
   "#a855f7",
 ];
 
-function PredictedPollutantsChart() {
+function PredictedPollutantsChart({ pollutants = {} }) {
+
+  const data = [
+    {
+      name: "PM2.5",
+      value: pollutants.pm25 ?? 0,
+    },
+    {
+      name: "PM10",
+      value: pollutants.pm10 ?? 0,
+    },
+    {
+      name: "NO₂",
+      value: pollutants.no2 ?? 0,
+    },
+    {
+      name: "SO₂",
+      value: pollutants.so2 ?? 0,
+    },
+    {
+      name: "CO",
+      value: pollutants.co ?? 0,
+    },
+  ];
+
   return (
+
     <div className="h-[380px] w-full">
 
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
 
-        <BarChart data={data}>
+        <BarChart
+          data={data}
+          margin={{
+            top: 10,
+            right: 20,
+            left: 0,
+            bottom: 0,
+          }}
+        >
 
           <CartesianGrid
             stroke="#1e293b"
@@ -49,22 +74,30 @@ function PredictedPollutantsChart() {
 
           <Tooltip
             contentStyle={{
-              background: "#0f172a",
+              backgroundColor: "#0f172a",
               border: "1px solid #334155",
               borderRadius: "12px",
             }}
+            formatter={(value) => [
+              `${value} µg/m³`,
+              "Concentration",
+            ]}
           />
 
           <Bar
             dataKey="value"
             radius={[8, 8, 0, 0]}
           >
+
             {data.map((entry, index) => (
+
               <Cell
-                key={index}
+                key={entry.name}
                 fill={colors[index]}
               />
+
             ))}
+
           </Bar>
 
         </BarChart>
@@ -72,6 +105,7 @@ function PredictedPollutantsChart() {
       </ResponsiveContainer>
 
     </div>
+
   );
 }
 
