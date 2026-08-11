@@ -81,11 +81,19 @@ function NearbyHospitals() {
 
             </div>
 
-            <button className="rounded-lg bg-cyan-500 px-4 py-2 text-slate-950 font-semibold hover:bg-cyan-400 transition">
-
-              Navigate
-
-            </button>
+            <button
+  onClick={() =>
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        hospital.name + " Delhi"
+      )}`,
+      "_blank"
+    )
+  }
+  className="rounded-lg bg-cyan-500 px-4 py-2 text-slate-950 font-semibold hover:bg-cyan-400 transition"
+>
+  Navigate
+</button>
 
           </div>
 
