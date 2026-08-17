@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(aqi_bp, url_prefix="/api")
-app.register_blueprint(prediction_bp)
+app.register_blueprint(prediction_bp, url_prefix="/api")
 
 
 @app.route("/")
@@ -19,5 +19,11 @@ def home():
     }
 
 
+import os
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=True
+    )
