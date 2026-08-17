@@ -11,51 +11,34 @@ import SymptomChecker from "../components/health/SymptomChecker";
 import HealthRecommendations from "../components/health/HealthRecommendations";
 import EmergencyPrecautions from "../components/health/EmergencyPrecautions";
 import NearbyHospitals from "../components/health/NearbyHospitals";
-
+import { fetchAQIData } from "../services/api";
 
 function Health() {
 
-  const [prediction, setPrediction] = useState(null);
+  const [aqiData, setAqiData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+const loadHealthData = async () => {
+  try {
+    setLoading(true);
+    setError(null);
 
-  const loadHealthData = async () => {
+    const data = await fetchAQIData("Delhi");
 
-    try {
-
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(
-        "http://127.0.0.1:5000/prediction?city=Delhi"
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch AQI data");
-      }
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      setPrediction(data);
-
-    } catch (err) {
-
-      console.error("Health AQI error:", err);
-
-      setError(err.message);
-
-    } finally {
-
-      setLoading(false);
-
+    if (!data) {
+      throw new Error("Failed to fetch current air quality data");
     }
 
-  };
+    setAqiData(data);
+
+  } catch (err) {
+    console.error("Health AQI error:", err);
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   useEffect(() => {
@@ -69,43 +52,36 @@ function Health() {
   // AQI DATA
   // --------------------------------------------------
 
-  const aqi = prediction?.predicted_aqi ?? 0;
-  const category = prediction?.category ?? "Unknown";
+  const aqi = aqiData?.aqi_index ?? 0;
+const category = aqiData?.status ?? "Unknown";
 
 
   // --------------------------------------------------
   // HEALTH RISK
   // --------------------------------------------------
 
-  let riskLevel;
-  let riskColor;
+let riskLevel;
+let riskColor;
 
-  if (aqi <= 50) {
-
-    riskLevel = "Low";
-    riskColor = "text-green-400";
-
-  } else if (aqi <= 100) {
-
-    riskLevel = "Moderate";
-    riskColor = "text-yellow-400";
-
-  } else if (aqi <= 200) {
-
-    riskLevel = "High";
-    riskColor = "text-orange-400";
-
-  } else if (aqi <= 300) {
-
-    riskLevel = "Very High";
-    riskColor = "text-red-400";
-
-  } else {
-
-    riskLevel = "Severe";
-    riskColor = "text-red-400";
-
-  }
+if (aqi === 1) {
+  riskLevel = "Good";
+  riskColor = "text-green-400";
+} else if (aqi === 2) {
+  riskLevel = "Fair";
+  riskColor = "text-green-400";
+} else if (aqi === 3) {
+  riskLevel = "Moderate";
+  riskColor = "text-yellow-400";
+} else if (aqi === 4) {
+  riskLevel = "Poor";
+  riskColor = "text-orange-400";
+} else if (aqi === 5) {
+  riskLevel = "Very Poor";
+  riskColor = "text-red-400";
+} else {
+  riskLevel = "Unknown";
+  riskColor = "text-slate-400";
+}
 
 
   // --------------------------------------------------
@@ -113,19 +89,18 @@ function Health() {
   // --------------------------------------------------
 
   const outdoorActivity =
-    aqi <= 100
-      ? "Safe"
-      : aqi <= 200
-      ? "Limit"
-      : "Avoid";
+  aqi <= 2
+    ? "Safe"
+    : aqi === 3
+    ? "Limit"
+    : "Avoid";
 
-
-  const outdoorColor =
-    aqi <= 100
-      ? "text-green-400"
-      : aqi <= 200
-      ? "text-yellow-400"
-      : "text-red-400";
+const outdoorColor =
+  aqi <= 2
+    ? "text-green-400"
+    : aqi === 3
+    ? "text-yellow-400"
+    : "text-red-400";
 
 
   // --------------------------------------------------
@@ -133,9 +108,9 @@ function Health() {
   // --------------------------------------------------
 
   const maskRecommendation =
-    aqi > 100
-      ? "N95"
-      : "Optional";
+  aqi >= 3
+    ? "N95"
+    : "Optional";
 
 
   // --------------------------------------------------
@@ -143,15 +118,14 @@ function Health() {
   // --------------------------------------------------
 
   const sensitiveStatus =
-    aqi > 100
-      ? "Alert"
-      : "Normal";
+  aqi >= 3
+    ? "Alert"
+    : "Normal";
 
-
-  const sensitiveColor =
-    aqi > 100
-      ? "text-red-400"
-      : "text-green-400";
+const sensitiveColor =
+  aqi >= 3
+    ? "text-red-400"
+    : "text-green-400";
 
 
   return (
@@ -216,7 +190,7 @@ function Health() {
               className="text-green-400"
             />
 
-            Current AQI: {loading ? "--" : aqi}
+            Current AQI: {loading ? "--" : `${aqi}/5`}
 
           </button>
 
@@ -265,41 +239,46 @@ function Health() {
 
 
         <HealthCard
-          title="Risk Level"
-          value={loading ? "--" : riskLevel}
-          subtitle="Current Health Risk"
-          badge={loading ? "--" : aqi}
-          badgeColor={riskColor}
-          valueColor={riskColor}
-        />
+  title="Risk Level"
+  value={loading ? "--" : riskLevel}
+  subtitle="Current Health Risk"
+  badge={loading ? "--" : `${aqi}/5`}
+  badgeColor={riskColor}
+  valueColor={riskColor}
+/>
 
 
         <HealthCard
-          title="Outdoor Activity"
-          value={loading ? "--" : outdoorActivity}
-          subtitle={
-            aqi <= 100
-              ? "Recommended Outdoors"
-              : "Reduce Outdoor Exposure"
-          }
-          badge="AQI Based"
-          badgeColor={outdoorColor}
-          valueColor={outdoorColor}
-        />
+  title="Outdoor Activity"
+  value={loading ? "--" : outdoorActivity}
+  subtitle={
+    aqi <= 2
+      ? "Outdoor activities are generally safe"
+      : aqi === 3
+      ? "Reduce prolonged outdoor exposure"
+      : "Avoid prolonged outdoor exposure"
+  }
+  badge={loading ? "--" : `AQI ${aqi}/5`}
+  badgeColor={outdoorColor}
+  valueColor={outdoorColor}
+/>
 
-
-        <HealthCard
-          title="Mask"
-          value={loading ? "--" : maskRecommendation}
-          subtitle="Recommended Outdoors"
-          badge={
-            aqi > 100
-              ? "Recommended"
-              : "Optional"
-          }
-          badgeColor="text-cyan-400"
-          valueColor="text-cyan-400"
-        />
+       <HealthCard
+  title="Mask"
+  value={loading ? "--" : maskRecommendation}
+  subtitle="Recommended outdoors"
+  badge={
+    loading
+      ? "--"
+      : aqi >= 4
+      ? "Required"
+      : aqi >= 3
+      ? "Recommended"
+      : "Optional"
+  }
+  badgeColor="text-cyan-400"
+  valueColor="text-cyan-400"
+/>
 
 
         <HealthCard
@@ -309,7 +288,7 @@ function Health() {
           badge={
             loading
               ? "--"
-              : aqi > 100
+              : aqi > 3
               ? "Risk"
               : "Low Risk"
           }
