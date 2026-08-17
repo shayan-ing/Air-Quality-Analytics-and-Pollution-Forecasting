@@ -515,10 +515,30 @@ def build_feature_row(
     )
 
 # --------------------------------------------------------
-# Random Forest was trained without feature scaling
-# --------------------------------------------------------
+    # Apply the SAME StandardScaler used during training.
+    #
+    # The Random Forest was trained on delhi_featured.csv,
+    # which had every feature column standardized
+    # (StandardScaler.fit_transform) BEFORE training.
+    #
+    # That scaler object was never saved to disk, so
+    # load_preprocessor() refits an equivalent scaler on
+    # delhi_cleaned.csv using the identical feature
+    # engineering steps. It was already being fit — it just
+    # was never actually applied here, which is why raw,
+    # unscaled values were reaching the model and saturating
+    # every prediction at 500.
+    # --------------------------------------------------------
+    scaled_values = scaler.transform(feature_df)
+
+    feature_df = pd.DataFrame(
+        scaled_values,
+        columns=FEATURES
+    )
+
 
     return feature_df
+
 
 
 # ============================================================
