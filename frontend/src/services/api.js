@@ -1,8 +1,11 @@
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000";
+
 export const fetchAQIData = async (city = "Delhi") => {
   try {
     const response = await fetch(
-  `http://127.0.0.1:5000/api/aqi?city=${encodeURIComponent(city)}`
-);
+      `${API_BASE_URL}/api/aqi?city=${encodeURIComponent(city)}`
+    );
 
     if (!response.ok) {
       throw new Error(`Backend returned ${response.status}`);

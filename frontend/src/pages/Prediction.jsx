@@ -13,6 +13,9 @@ import WeatherForecastChart from "../components/charts/WeatherForecastChart";
 import PredictedPollutantsChart from "../components/charts/PredictedPollutantsChart";
 import AIInsightsPrediction from "../components/prediction/AIInsightsPrediction";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000";
+
 function Prediction() {
 
   const [prediction, setPrediction] = useState(null);
@@ -28,8 +31,8 @@ const [selectedCity, setSelectedCity] = useState("Delhi");
       setError(null);
 
       const response = await fetch(
-        `http://127.0.0.1:5000/prediction?city=${encodeURIComponent(selectedCity)}`
-      );
+  `${API_BASE_URL}/api/prediction?city=${encodeURIComponent(selectedCity)}`
+);
 
       if (!response.ok) {
         throw new Error("Failed to fetch prediction");
