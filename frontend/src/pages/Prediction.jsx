@@ -259,15 +259,12 @@ const [selectedCity, setSelectedCity] = useState("Delhi");
 
 
           <button
-            onClick={loadPrediction}
-            className="flex min-w-[190px] items-center justify-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400"
-          >
-
-            <Sparkles size={18} />
-
-            Run Prediction
-
-          </button>
+  onClick={() => loadPrediction(selectedCity)}
+  className="flex min-w-[190px] items-center justify-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400"
+>
+  <Sparkles size={18} />
+  Run Prediction
+</button>
 
         </div>
 
